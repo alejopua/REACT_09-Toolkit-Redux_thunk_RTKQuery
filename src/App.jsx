@@ -2,7 +2,11 @@ import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
 import { useSelector, useDispatch } from "react-redux";
-import { increment } from "./store/slicer/counter/counterSlice";
+import {
+  decrement,
+  incrementByAmount,
+  increment,
+} from "./store/slicer/counter/counterSlice";
 
 function App() {
   const { counter } = useSelector((state) => state.counter);
@@ -18,11 +22,13 @@ function App() {
           <img src={reactLogo} className="logo react" alt="React logo" />
         </a>
       </div>
-      <h1>Vite + React</h1>
+      <h1>{counter}</h1>
       <div className="card">
-        <button onClick={() => dispatch(increment())}>
-          count is {counter}
+        <button onClick={() => dispatch(decrement())}>Decrement</button>
+        <button onClick={() => dispatch(incrementByAmount(2))}>
+          IncrementBy2
         </button>
+        <button onClick={() => dispatch(increment())}>Increment</button>
       </div>
     </>
   );
