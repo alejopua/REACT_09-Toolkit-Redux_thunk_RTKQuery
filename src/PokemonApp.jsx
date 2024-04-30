@@ -17,9 +17,10 @@ export const PokemonApp = () => {
         <hr />
         <ul>
           {isLoading && <p>Loading...</p>}
-          {pokemons.map((pokemon, index) => (
-            <li key={index}>{pokemon.name}</li>
-          ))}
+          {!isLoading &&
+            pokemons.map((pokemon, index) => (
+              <li key={index}>{pokemon.name}</li>
+            ))}
         </ul>
         <div className="containerButtons">
           <button onClick={() => dispatch(getPokemons(page))}>Next</button>
