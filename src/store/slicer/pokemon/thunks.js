@@ -21,6 +21,6 @@ export const getPokemons = (page = 0) => {
           page: page + 1,
         })
       );
-    }, 2000);
+    }, 1000);
   };
 };
