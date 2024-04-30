@@ -1,16 +1,28 @@
-import { useGetTodosQuery } from "./store/api/todosApi";
+import { useState } from "react";
+import { useGetTodoQuery, useGetTodosQuery } from "./store/api/todosApi";
 
 export const TodoApp = () => {
-  const { data: todos = [], isLoading } = useGetTodosQuery();
+  const [getTodoId, setGetTodoId] = useState(1);
+  // const { data: todos = [], isLoading } = useGetTodosQuery();
+  const { data: todo, isLoading } = useGetTodoQuery(getTodoId);
+
+  const handlePrevTodo = () => {
+    if (getTodoId === 1) return;
+    setGetTodoId(getTodoId - 1);
+  };
+
+  const handleNextTodo = () => {
+    setGetTodoId(getTodoId + 1);
+  };
 
   return (
     <>
       <h1>Todo - RTK Query</h1>
       <hr />
       <h4>isLoading: {isLoading ? "True" : "False"}.</h4>
-      <pre>...</pre>
+      <pre>{JSON.stringify(todo)}</pre>
       <ul>
-        {todos.map((todo) => (
+        {/* {todo.map((todo) => (
           <div key={todo.id}>
             <li>
               {" "}
@@ -18,9 +30,10 @@ export const TodoApp = () => {
               {todo.title}
             </li>
           </div>
-        ))}
+        ))} */}
       </ul>
-      <button>Next Todo</button>
+      <button onClick={() => handlePrevTodo()}>prev Todo</button>
+      <button onClick={() => handleNextTodo()}>Next Todo</button>
     </>
   );
 };
