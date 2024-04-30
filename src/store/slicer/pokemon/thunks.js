@@ -10,6 +10,11 @@ export const getPokemons = (page = 0) => {
     const data = await response.json();
     console.log(data);
 
-    // dispatch( setPokemons( ))
+    dispatch(
+      setPokemons({
+        pokemons: data.results,
+        page: page + 1,
+      })
+    );
   };
 };
